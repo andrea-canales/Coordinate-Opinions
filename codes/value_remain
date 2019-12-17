@@ -1,0 +1,21 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Fri Jun 14 12:23:25 2019
+
+@author: andreacanales
+"""
+
+def value_remain(n,G,alpha,eta,C,it,i,posted,t):
+    var=0
+    for tt in list(range(t,it)):
+    # update the dynamics
+        for j in range(n):
+            if j in C:
+                alpha[j] = posted
+            else
+                aux = alfa
+                alfa[j] = (1-eta)*aux[j]+eta*sum(aux[v] for v in G[j]))/G.degree(j)
+     var=var+(1-eta)*(alpha[i]-posted)^2+eta*sum((alpha[v]-posted)^2 for v in G[i]))
+ 
+    return var              

@@ -1,0 +1,48 @@
+\documentclass[11pt]{article}
+
+\usepackage{amsmath,amssymb}
+
+\usepackage[utf8]{inputenc}
+
+\newcommand{\R}{\mathbb{R}}
+
+
+\begin{document}
+
+
+\section*{Viernes 5 Abril}
+
+\begin{itemize}
+	\item Estamos considerando el modelo de DeGroot modificado a lo Kleinberg con tolerancia.
+	\item A este modelo de incluimos un umbral de tolerancia, y si la opinión de mi vecino está más alejada de la mÃ­a que ese umbral, lo multiplico por cero. (Tolerancia limitada)
+	\item Comparamos, corremos las dinámicas de ambos modelos y queremos medir las distancias entre los estados estacionarios de ambas dinámicas, y medimos las distancias:
+	\begin{itemize}
+	\item Si la distancia es grande, tiene poca resistencia a polarizarse.
+	\item Si la distancia es chica, tiene alta resistencia a polarizarse.
+	\item Por ejemplo, la distancia puede ser:
+	\begin{align*}
+		\vert \vert \Pi_L - \Pi_{\infty}\vert \vert _p
+	\end{align*}
+	\item Idea de modelo:
+	\begin{align*}
+		G(V,E)\\
+		x_i(t)\in \R^V \\
+		x_i(t+1) = \alpha x_i(t) + (1-\alpha) \frac{1}{\vert {\cal N}_t^{\varepsilon}(i) \vert} \sum_{j\in {\cal N}_t^{\varepsilon}(i)} x_j(t) 
+	\end{align*}
+	donde,
+	\begin{align*}
+		{\cal N}_t^{\varepsilon}(i)=\{j\in {\cal N}(i): \vert x_i(t)-x_j(t)\vert <\varepsilon   \}
+	\end{align*}
+\end{itemize}
+
+\end{itemize}
+\section*{Viernes 26 de Abril}
+
+\begin{itemize}
+	\item Consideraremos un cartel a un grupo de nodos conectados que puede coordinarse en emitir una opinión $z^*$.
+	\item Cada miembro del cartel, actualizara su opinión, sólo considerando a los  otros miembros del cartel. 
+	\item El resto del grafo actualiza de la manera usual.
+	\item Preguntas ¿Cuál es la opinión óptima que elige el cartel? ¿Cuál es el costo de desviarse?. Para sustentar la opinión colusiva, ¿ponderaremos la opinión $z^*$ por el costo de desviarse o la conectividad de los miembros?
+\end{itemize}
+\section*{Viernes 3 Mayo}
+\end{document}

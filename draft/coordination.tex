@@ -1,0 +1,762 @@
+ \documentclass[letterpaper,11pt]{article}
+\usepackage{tgpagella}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{fullpage,paralist}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{comment,hyperref}
+\usepackage{thmtools}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{varwidth}
+\pgfplotsset{compat=1.10}
+\usepgfplotslibrary{fillbetween}
+\usetikzlibrary{backgrounds}
+\usetikzlibrary{patterns}
+
+% Special commands
+\newcommand{\PP}{\mathbb{P}}
+\newcommand{\calR}{\mathcal{R}}
+\newcommand{\calG}{\mathcal{G}}
+\newcommand{\calH}{\mathcal{H}}
+\newcommand{\calM}{\mathcal{M}}
+\newcommand{\calL}{\mathcal{L}}
+\newcommand{\calP}{\mathcal{P}}
+\newcommand{\calQ}{\mathcal{Q}}
+\newcommand{\calF}{\mathcal{F}}
+\newcommand{\calC}{\mathcal{C}}
+\newcommand{\CC}{\mathcal{C}}
+\newcommand{\gumbel}{\calF_{\text{g}}}
+\newcommand{\frechet}{\calF_{\text{f}}}
+\newcommand{\mhr}{\text{MHR}}
+\newcommand{\calA}{\mathcal{A}}
+\newcommand{\calT}{\mathcal{T}}
+\newcommand{\calE}{\mathcal{E}}
+\newcommand{\RR}{\mathsf{R}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\FF}{\mathbb{F}}
+\newcommand{\GL}{\text{GL}}
+\newcommand{\EE}{\mathsf{E}}
+\newcommand{\ass}{\text{Assign}}
+\newcommand{\clp}{\text{clp}}
+\newcommand{\config}{\text{conf}}
+\newcommand{\conf}{\text{conf}}
+\newcommand{\apx}{\text{apx}}
+\newcommand{\ALG}{\mathrm{ALG}}
+\newcommand{\OPT}{\mathrm{OPT}}
+%further commands
+\newcommand{\sG}{\mathsf{G}}
+\newcommand{\fr}{\mathsf{f}}
+\newcommand{\fsf}{\mathsf{F}}
+\newcommand{\gsf}{\mathsf{G}}
+\newcommand{\hsf}{\mathsf{H}}
+\newcommand{\ksf}{\mathsf{K}}
+\newcommand{\asf}{\mathsf{A}}
+\newcommand{\bsf}{\mathsf{B}}
+\newcommand{\csf}{\mathsf{C}}
+\newcommand{\dsf}{\mathsf{D}}
+\newcommand{\esf}{\mathsf{E}}
+\newcommand{\lsf}{\mathsf{L}}
+\newcommand{\nsf}{\mathsf{N}}
+\newcommand{\ssf}{\mathsf{S}}
+\newcommand{\rsf}{\mathsf{R}}
+\newcommand{\tsf}{\mathsf{T}}
+\newcommand{\usf}{\mathsf{U}}
+\newcommand{\vsf}{\mathsf{V}}
+\newcommand{\wsf}{\mathsf{W}}
+\newcommand{\isf}{\mathsf{I}}
+\newcommand{\omsf}{\mathsf{\Omega}}
+\newcommand{\cc}{\mathsf{Cp}}
+\newcommand{\rk}{\mathsf{rk}}
+\newcommand{\cost}{\mathsf{cost}}
+\newcommand{\degsf}{\mathsf{deg}}
+\newcommand{\tv}{\mathsf{TV}}
+\newcommand{\tmix}{t_{\mathsf{mix}}}
+\newcommand{\psf}{\mathsf{P}}
+\newcommand{\xsf}{\mathsf{x}}
+% Environments
+\newtheorem{thm}{Theorem}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\newtheorem{remark}{Remark}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{definition}{Definition}
+\newtheorem{example}{Example}
+\newtheorem{proposition}{Proposition}
+\newtheorem{claim}{Claim}
+\newtheorem{conjecture}{Conjecture}
+\newtheorem{intuition}{Intuition}
+
+% Comments
+%\setlength{\marginparwidth}{1in}
+\usepackage[textsize=tiny,textwidth=2cm]{todonotes}
+\newcommand{\accom}[1]{\todo[color=blue!25!white]{Andrea: #1}}
+\newcommand{\vvcom}[1]{\todo[color=red!25!white]{Victor: #1}}
+
+%Algorithms
+\usepackage{multirow}
+\usepackage[noend]{algpseudocode}
+\usepackage{algorithm,algorithmicx}
+\usepackage{xcolor}
+\def\NoNumber#1{{\def\alglinenumber##1{}\State #1}\addtocounterhh{ALG@line}{-1}}
+\newlength{\algofontsize}
+\setlength{\algofontsize}{6pt}
+\hypersetup{
+	colorlinks,
+	linkcolor={red!50!black},
+	citecolor={blue!50!black},
+	urlcolor={blue!80!black}
+}
+
+\begin{document}
+	\algrenewcommand\algorithmicrequire{\textbf{Input:}}
+	\algrenewcommand\algorithmicensure{\textbf{Output:}}
+	
+	\title{Sustainability of Opinion Coordination in Social Networks
+%	 \thanks{This work was partially supported by blablabla}
+	 }
+	\author{Andrea Canales
+	\thanks{Institute of Social Sciences, Universidad de O'Higgins. {\tt andrea.canales@uoh.cl}}
+	\and Victor Verdugo			
+	\thanks{Department of Mathematics, London School of Economics and Political Science. {\tt v.verdugo@lse.ac.uk}}
+	\thanks{Institute of Engineering Sciences, Universidad de O'Higgins. {\tt victor.verdugo@uoh.cl}}
+	}
+\date{\vspace{-1em}}
+\maketitle
+\begin{abstract}
+The process by which opinions spread through a large social network can be modeled as an interaction between the initial opinion of an agent and their neighbor's opinions. This process can be affected by stubborn agents, who maintain their initial opinion fixed. We characterize under which conditions a group of regular agents can coordinate their opinions and behave like stubborn agents. We show that if an agent has incentives to coordinate his opinion in the first period, he announces the opinion of the coordination in every period. There exist an interval of opinions that can be sustained by the coordinated agents, which   depends on their initial opinion and the connectivity of this subgraph. We also study how this coordination impact the convergence speed  and characterize the convergence time .
+	\accom{Todos los cambios son bienvenidos y sorry el ingles}
+
+	\vvcom{we need a catchy title :)}
+\end{abstract}
+\newpage
+\section{Introduction}
+\accom{Hacer la analogía de este modelo a la literatura de carteles incompletos. No todos pueden escoger ``precios'',solo los invitados a coordinarse y buscamos condiciones bajo las cuales esta coordinación  es maximal}
+\section{Coordination Model}
+
+%\noindent{\it Posted Opinions.}
+Consider a graph $G=(V,E)$ representing a social network.
+Every node $v\in V$ in the network has an intrinsic opinion $\gamma_0(v)$.
+%At every time step $t\in \ZZ_+$, every node $v\in V$ {\it declares} an opinion $\gamma_t(v)$.
+%Of particular interest are {\it blind posted opinions}, that is, there exists $\gamma_C\in [0,1]$ such that $\gamma_C(t)=\gamma_C$ for every $t\in \ZZ_+$.
+Given a vector $y\in [0,1]^V$, each node $u\in V$ faces a cost given by 
+\begin{equation}
+\cost_u(y)=\frac{\eta_u}{2}(\gamma_0(u)-y(u))^2+ \frac{1}{2} \sum_{v\in \nsf(u)}(y(v)-y(u))^2,
+\end{equation} 
+%\vvcom{deberiamos dar un nombre a esta opinion, "natural" quizas?}
+that is, it corresponds to the {\it opinion dispersion} faced by node $u$ respect to its neighbors and its initial opinion $\gamma_0(u)$. 
+%In what follows we denote by $\degsf(v)=|\nsf(v)|$ the number of neighbors of $v$ in $G$.
+%\vvcom{un poco mas de blabla aca, chequear si es el lenguaje mas apropiado}
+For every $u\in V$, the parameter $\eta_u$ captures how resistant is $u$ to modify his initial opinion $\gamma_0(u)$.
+A large value of $\eta_u$ implies a large cost incurred by $u$.\\
+%In particular, one can check that for every $t\in \ZZ_+$, $\gamma_v(t)$ corresponds to the value that minimises the opinion variance of $v$ respect to the current opinion vector $\gamma_{t-1}$, that is, 
+
+\noindent{\it Coordinations.} At every time step $t\in \NN$ and for every $u\in V$, $\gamma_t(u)$ denotes the opinion {\it declared} by $u$.
+We say that $(C,\beta)$ is a {\it coordination} if every node $v\in C$ declares the same opinion $\beta$, that is, for every $t\in \ZZ_+$ and for every $u\in C$, $\gamma_t(u)=\beta$.
+Every node $u\notin C$ updates the opinion according to 
+%\begin{equation}
+%\gamma_t(v)=\text{argmin}\Big\{\text{var}_v(\alpha_C,\gamma_{t-1}):\alpha_C\in \RR\Big\}.
+%\end{equation}
+%Every node $v\in V\setminus C$ declares an opinion according to the following opinion update,
+%For every $t\in \mathbb{Z}_+$, the opinion of node $v$ updates according to the DeGroot model, that is, 
+\begin{align}
+\label{eq:update}
+\gamma_{t+1}(u)&=\frac{\eta_u}{\degsf(u)+\eta_u}\cdot \gamma_0(u)+\frac{1}{\degsf(u)+\eta_u}\sum_{v\in \nsf(u)}\gamma_{t}(v),
+%		&=(1-\eta)\cdot \gamma_{t-1}(v)+\frac{\eta}{|N(v)\cap R|}\sum_{u\in N(v)\cap R}\gamma_{t-1}(u)+\eta \cdot \gamma_{t-1}(C),
+\end{align}
+%namely, it averages with a weight of $\eta$ the current opinion and with weight $1-\eta$ the average of the current opinions of the neighbors of $v$. 
+Observe that if $C=\emptyset$ we then recover the classic Friedkin and Johnsen opinion dynamics model~\cite{}.
+In what follows, it will be useful to consider the dynamics in a matrix form.
+Consider the matrix $\asf\in \RR^{V\times V}$ defined as follows: 
+Let $\asf(u,v)=1/(\degsf(u)+\eta_u)$ if $\{u,v\}\in E$ and $u\in V\setminus C$, and zero otherwise, and let $\bsf\in \RR^{V\times V}$ the diagonal matrix given by $\bsf(u,u)=\eta_u/(\degsf(u)+\eta_u)$ for every $u\in V\setminus C$.
+Then, the dynamics of the declared opinions (\ref{eq:update}) can be written as
+\begin{equation}
+\label{eq:update-matrix}
+\gamma_{t+1}=\asf \gamma_t+\beta \isf_C+\bsf\gamma_0,
+%=\asf^{t} \gamma_1+\sum_{j=0}^{t-1}\asf^j \bsf \gamma_0+\beta\isf_C,
+\end{equation}
+where $\isf_C\in \RR^{V\times V}$ is such that $\isf_C(u,u)=1$ if $u\in C$, and zero otherwise.
+In particular, observe that from $t=1$ every member of the coordination declares the opinion $\beta$, that is, for every $u\in C$ we have $\gamma_1(u)=\beta$.
+In the following, we call $\gamma$ the {\it coordination dynamics} for $(C,\beta)$.
+A similar dynamics was considered by Ghaderi and Srikant~\cite{}, to study networks with {\it stubborn} agents. 
+We later provide a random walk interpretation of the above dynamics to study the evolution and long-run behavior of the process. 
+For notational convenience, in what follows we call $\gamma_0^{\beta}\in \RR^V$ the vector such that $\gamma_0^{\beta}(u)=\beta$ if $u\in C$ and $\gamma_0^{\beta}(u)=\gamma_0(u)$ if $u\in V\setminus C$.
+\begin{example}
+\vvcom{ejemplito con grafo chico y una o dos iteraciones}
+\end{example}
+
+%\begin{lemma}
+%limiting behavior of the dynamics
+%\end{lemma}
+%The opinion at time $t$ is then the expected opinion of the process above.
+%\vvcom{chequear esto, ajustar definicion del costo de ser necesario}
+%It can be shown that the dynamics above converge to an opinion vector $\alpha_C^*$ ....{\color{red} ver OpinionSurvey2017, chapter 2.1}\\
+%\vvcom{dar el background que sea necesario en esta parte, el paper EC19naive trata el modelo de degroot modificado}
+
+%\vvcom{podemos usar Colluted en vez de Coordinated, o block, etc, no se que sera mejor}\\
+
+\begin{comment}
+\noindent{\it Sustainability.} Every node $u\in V$ faces a discount factor of $\delta\in (0,1)$, representing the {\color{red} dar la intuicion aca.}
+%In the following assume that $\gamma_0(u)$ is distributed uniformly at random in $[0,1]$ for every $u\in V$, independently from each other. 
+We say that a triplet $(C,\beta,\gamma_0)$ is a {\it sustainable coordination} if for every $u\in C$ we have that
+\begin{equation}
+\sum_{t=1}^{\infty}\delta^{t}\cost_u(\gamma_{t})\le \sum_{t=1}^{\infty}\delta^{t}\cost_u(\tilde \gamma_{t}),
+\end{equation}
+where $\tilde \gamma$ is the coordination dynamics for $(C\setminus \{u\},\beta)$.
+That is, the expected discounted cost that faces a node $u\in C$ is less than the expected discounted cost faced by not joining the coordination.
+\end{comment}
+%The expectation is taken over the randomness of the intrinsic opinions $\gamma_0$.
+
+\section{Existence and Behavior of the Long-run Opinions}
+
+In what follows we use a result by Ghaderi \& Srikant showing the existence and providing a characterization of the long-run opinions of a network under the presence of stubborn agents. 
+%An agent is {\it stubborn} if $\eta_u>0$ and {\it fully stubborn} if $\eta_u=\infty$.
+To study the dynamics, the authors construct a random walk in an auxiliary graph, and characterize the long-run opinion by studying the stationary distribution of this auxiliary random walk.
+Observe that in our model, for a coordination $(C,\beta)$ we have that every $u\in C$ can be seen a fully stubborn agent for the dynamics from $t=1$.
+Nevertheless, the value of $\beta$ can be chosen after the realization of each of the intrinsic opinions of the members in the coordination.
+For the sake of completeness, we include the random walk construction here and state the results in our context.\\
+
+\noindent{\it An auxiliary random walk.} Given a graph $G$ and $C\subseteq V$, consider the auxiliar graph, $\cal{G}=(\cal{V},\cal{E})$ defined as follows. 
+We have $\mathcal{V}=V\cup T$ where $T=\{x_v:v\in V\setminus C\}$, that is, the set of nodes $\cal{V}$ consists of every node in the original graph and a copy of each node not in $C$. 
+Furthermore, in the auxiliary graph every node in $V\setminus C$ is connected to its copy, that is, $\mathcal{E}=E\cup \{\{v,x_v\}:v\in V\setminus C\}$.
+Consider the random walk $(\xsf_t)_{t\in \ZZ_+}$ over the graph $\mathcal{G}$ with $\psf\in [0,1]^{\mathcal{V}\times \mathcal{V}}$ given by
+\[
+\psf(u,v)=
+\begin{cases}
+1/\degsf(u) & \text{ for every }u\in C\text{ and every }v\in \nsf(u),\\
+1/(\degsf(u)+\eta_u)& \text{ for every }u\in V\setminus C\text{ and every }v\in \nsf(u),\\
+\eta_u/(\degsf(u)+\eta_u) & \text{ for every }u\in V\setminus C\text{ and }v=x_u,\\
+1 & \text{ for every }v\in V\text{ and }u=x_v,
+\end{cases}
+\]
+For every $v\in \mathcal{V}$, consider $\tau_v=\inf\{t\in \ZZ_+:\xsf_t=v\}$, that is, the hitting time of vertex $v$, and let $\tau=\inf\{t\in \ZZ_+:\xsf_t\in C\cup T\}$ the hitting time of the set of nodes in $C\cup T$.
+%For every $v\in V$, l
+Let $\alpha_C\in \RR^{V\times V}$ such that for every $u\in V$ and every $v\in C$ we have $\alpha_C(u,v)=\PP_u(\tau_{x_v}=\tau)$. 
+In particular, $\alpha_C$ is a stochastic matrix.
+%when $v\in V\setminus C$, and $\alpha_C(u,v)=\Theta_u(C)$ when $v\in C$, where 
+Furthermore, consider the quantity given by
+\begin{equation*}
+\Theta_{u,C}=\sum_{v\in C}\PP_u(\tau=\tau_{v}).
+\end{equation*}
+The value above corresponds to the probability that the random walk $(\xsf_t)_{t\in \ZZ_+}$ starting at $u\in V$ hits $C\cup T$ in a vertex that belongs to $C$.
+We now state the technical lemma from~\cite{} adapted to our context.
+We include a proof of it in the Appendix. 
+%\vvcom{quizás escribir lo que viene en terminos de la distribucion estacionaria $\pi$ del RW}
+\begin{lemma}[\cite{GS12}]
+Let $G=(V,E)$ be a connected graph and $\gamma_0$ a vector of intrinsic opinions. 
+Then, for every coordination $(C,\beta)$ there exists $\gamma_{\infty}\in \RR^V$ such that $\displaystyle\lim_{t\to \infty}\gamma_t=\gamma_{\infty}$.
+Furthermore, we have that $\gamma_{\infty}=\alpha_C \gamma_0^{\beta}$.
+\end{lemma}
+%\vvcom{incluir demo en el appendix}
+\noindent That is, for every $v\in V\setminus C$ we have that the limit opinion is given by
+\begin{equation*}
+\gamma_{\infty}(v)=\sum_{w\in V\setminus C}\gamma_0(w)\alpha_C(v,w)+\beta\Theta_{v,C}.
+\end{equation*}
+%where $\Theta(C)=\sum_{v\in C}\PP_u(\tau=\tau_{v})$.
+%Furthermore, we have $\sum_{u\in V\setminus C}\PP_v(\tau_{x_u}=\tau)+\Theta(C)=1$, therefore, 
+That is, $\gamma_{\infty}(v)$ is a convex combination of the intrinsic opinions of the nodes in $V\setminus C$, and the opinion $\beta$ of the coordination. 
+Observe that for every $v\in V\setminus C$, the first term in the equality above is independent of $\beta$.
+We call this term the {\it effective external opinion},
+\begin{equation}
+\tau_{v,C}(\gamma_0)=\sum_{w\in V\setminus C}\gamma_0(w)\alpha_C(v,w).\\
+\end{equation}
+
+\noindent{\it Conditional Expectations.} 
+Given a coordination $(C,\beta)$, by the definition of the hitting probabilities it follows that for each $v\in V\setminus C$, we have that $1-\Theta_{v,C}=\sum_{w\in V\setminus C}\alpha_C(v,w)$.
+Consider the probability distribution $f_{v,C}$ over the nodes in $V\setminus C$ such that for each $w\in V\setminus C$ we have 
+\begin{equation*}
+f_{v,C}(w)=\frac{\alpha_C(v,w)}{1-\Theta_{v,C}}.
+\end{equation*}
+We denote by $\EE_{v,C}$ the expectation operator from probability distributation above.
+Observe that $f_{v,C}$ corresponds to the probability distribution induced by $\alpha_C$ conditional on the random walk $(\mathsf{x}_t)_{t\in \ZZ_+}$ starting at $v$ hitting for the first time $C\cup T$ in a vertex of $T$.
+Therefore, given a random variable $\mathsf{a}\sim f_{v,C}$, the effective external opinion corresponds to 
+\begin{equation*}
+\tau_{v,C}(\gamma_0)=(1-\Theta_{v,C})\EE_{v,C}(\gamma_0(\mathsf{a}))
+\end{equation*}
+For each $C\subseteq V$, the limit opinion is a function of the intrinsic opinions $\gamma_0$ and $\beta$ and it will be useful in what follows to consider the function mapping a pair $(\gamma_0,\beta)\in \RR^V\times [0,1]$ onto $\Omega_C(\gamma_0,\beta)=\alpha_C \gamma_0^{\beta}\in \RR^V$.\\
+
+\noindent{\it Mixing time.} A quantity that plays a role in our analysis is the time it requires for the random walk distribution to be very close from the stationary one.
+Given two probability distributions $\mu$ and $\nu$ over $\mathcal{V}$, the total variation distance between $\mu$ and $\nu$ is given by
+\begin{equation}
+\|\mu-\nu\|_{\tv}=\frac{1}{2}\sum_{u\in \mathcal{V}}|\mu(u)-\nu(u)|.
+\end{equation}
+For every every $u\in \mathcal{V}$, we denote by $\delta_u$ the probability distribution such that $\delta_u(u)=1$ and zero otherwise. 
+Then, the mixing time of the random walk $(\xsf_t)_{t\in \ZZ_+}$ corresponds to the value
+\begin{equation}
+\tmix(\mathcal{G})=\min\Big\{t\in \ZZ_+:\max_{u\in \mathcal{V}}\|\psf^t\delta_u-\pi\|_{\tv}\le 1/e\Big\}.
+\end{equation}
+That is, the amount of time it requires for the distribution induced by the random walk to be within a distance of at most $1/e$ from the stationary distribution, no matter the initial state.
+The constant is arbitrary, since one could replace its value by $\varepsilon$ at cost of a logarithmic factor, $\tmix(\mathcal{G})\log(1/\varepsilon)$.
+
+\section{Sustainability in the Long-run}
+
+In what follows, we study under what conditions it is possible for a coordination to sustain in the long-run, that is, by considering the cost under the limiting opinion.
+We say that $(C,\beta,\gamma_0)$ is {\it sustainable in the long-run} if for every $u\in C$ we have~\footnote{For notational simplicity we denote by $C-u$ the set $C\setminus \{u\}$.} 
+\begin{equation*}
+\cost_u(\Omega_C(\gamma_0,\beta))\le \cost_u(\Omega_{C-u}(\gamma_0,\beta)).
+\end{equation*}
+That is, every node in $C$ faces a lower cost by being in the coordination than being out.
+In what follows, we say that a pair $(C,\gamma_0)$ satisfies the {\it zero opinion contraction condition} if for every $u\in C$, we have that 
+%\vvcom{Aca va la condicion que garantiza que $C$ es one minded o zero minded (ver mas abajo la def de esto)}
+%\vvcom{estas son las condiciones para $\eta_u=0$, cuando son distintos de cero queda un poco mas fea pero no tanto. Pero bueno, es lo que es no mas}
+\begin{equation*}
+%\EE^2_{u,C-u}(\gamma_0(\mathsf{a}_u))\ge \frac{1}{\deg_C(u)}\sum_{v\in V\setminus C}\EE_{v,C}^2(\gamma_0(\mathsf{a}_v))\left(\frac{1-\Theta_v(C)}{1-\Theta_u(C-u)}\right)^2
+%\deg_C(u) \ge \sum_{v\in V\setminus C}\left(\frac{\tau_{v,C}(\gamma_0)}{\tau_{u,C-u}(\gamma_0)}\right)^2+\eta_u\left(\frac{2\gamma_0(u)}{\tau_{u,C-u}(\gamma_0)}-1\right).
+\degsf_C(u) + \sum_{v\in \nsf(u)\setminus C}\left(\frac{\tau_{v,C-u}(\gamma_0)}{\tau_{u,C-u}(\gamma_0)}-1\right)^2\ge \sum_{v\in \nsf(u)\setminus C}\left(\frac{\tau_{v,C}(\gamma_0)}{\tau_{u,C-u}(\gamma_0)}\right)^2+\eta_u\left(\frac{2\gamma_0(u)}{\tau_{u,C-u}(\gamma_0)}-1\right).
+\end{equation*}
+%where $\mathsf{a}_u\sim f_{u,C-u}$ and $\mathsf{a}_{v}\sim f_{v,C}$ for every $v\in V\setminus C$.
+Similarly, we say that a pair $(C,\gamma_0)$ satisfies the {\it one opinion contraction condition} if for every $u\in C$, we have that 
+%\vvcom{Aca va la condicion que garantiza que $C$ es one minded o zero minded (ver mas abajo la def de esto)}
+\begin{equation*}
+%\EE^2_{u,C-u}(\gamma_0(\mathsf{a}_u))\ge \frac{1}{\deg_C(u)}\sum_{v\in V\setminus C}\EE_{v,C}^2(\gamma_0(\mathsf{a}_v))\left(\frac{1-\Theta_v(C)}{1-\Theta_u(C-u)}\right)^2
+%\deg_C(u) \ge \sum_{v\in V\setminus C}\left(\frac{\tau_{v,C}(\mathsf{e}-\gamma_0)}{\tau_{u,C-u}(\mathsf{e}-\gamma_0)}\right)^2+\eta_u\left(\frac{2(1-\gamma_0(u))}{\tau_{u,C-u}(\mathsf{e}-\gamma_0)}-1\right),
+\degsf_C(u) + \sum_{v\in \nsf(u)\setminus C}\left(\frac{\tau_{v,C-u}(\mathsf{e}-\gamma_0)}{\tau_{u,C-u}(\mathsf{e}-\gamma_0)}-1\right)^2\ge \sum_{v\in \nsf(u)\setminus C}\left(\frac{\tau_{v,C}(\mathsf{e}-\gamma_0)}{\tau_{u,C-u}(\mathsf{e}-\gamma_0)}\right)^2+\eta_u\left(\frac{2(1-\gamma_0(u))}{\tau_{u,C-u}(\mathsf{e}-\gamma_0)}-1\right).
+\end{equation*}
+\vvcom{me da la sensacion de que un conjunto no puede zer zero contractive y one contractive a la vez}
+where $\mathsf{e}$ is the all ones vector in $\RR^V$.
+In the sequel, we say that $(C,\gamma_0)$ satisfies the contraction condition if it satisfies at least one of the above conditions.
+The following is the main theorem of this section.
+\begin{theorem}
+\label{thm:longrun}
+Let $G=(V,E)$ a connected graph and $(C,\gamma_0)$ satisfying the contraction condition.
+Then, there exists a non-empty interval $\mathcal{I}(C,\gamma_0)\subseteq [0,1]$ with $\mathcal{I}(C,\gamma_0)\cap \{0,1\}\ne \emptyset$ such that for every $\beta\in \mathcal{I}(C,\gamma_0)$ we have that $(C,\beta,\gamma_0)$ is sustainable in the long-run.  
+\end{theorem}
+%\vvcom{describir aca el intervalo}
+Observe that in particular, an extreme opinion in $\{0,1\}$ makes the coordination sustainable in the long-run as long as $(C,\gamma_0)$ satisfies the contraction condition. 
+In what follows we show how to prove the theorem above. 
+\vvcom{aqui discutir un poco el teorema anterior}
+\subsection{Extreme Opinion Minded Sets: Proof of Theorem~\ref{thm:longrun}}
+
+We study first the conditions under which a node $u\in C$ faces a lower cost by being in the coordination.
+For every $u\in C$, consider the function 
+\begin{equation*}
+f_u(\beta)=\cost_u(\Omega_C(\gamma_0,\beta))- \cost_u(\Omega_{C-u}(\gamma_0,\beta))
+\end{equation*}
+In the following, we say that $C$ is {\it one minded} if for every $u\in C$ we have that $f_u(1)<0$.
+Symmetrically, we say that $C$ is {\it zero minded} if for every $u\in C$ we have that $f_u(0)<0$.
+
+\begin{proposition}
+\label{prop:minded}
+Let $C\subseteq V$ be a non-empty subset of nodes.
+Then, the following holds.
+\begin{itemize}
+	\item[$(a)$] If $C$ is one minded, there exists $\beta^{1}\in (0,1)$ such that for every $f_u(\beta)\le 0$ for every $\beta\in [\beta^1,1]$.
+	\item[$(b)$] If $C$ is zero minded, there exists $\beta^{0}\in (0,1)$ such that for every $f_u(\beta)\le 0$ for every $\beta\in [0,\beta^0]$.
+\end{itemize}
+\end{proposition}
+
+\begin{proof}
+If $C$ is one minded, by continuity we have that for every $u\in C$ there exists $\beta_u\in (0,1)$ such that $f_u(\beta)\le 0$ for every $\beta\in [\beta_u,1]$. 
+In particular, given $\beta^1=\max_{u\in C}\beta_u$, we have that for every $u\in C$ it holds that $f_u(\beta)<0$ for every $\beta\in [\beta^1,1]$.
+The proof follows in the same way when $C$ is zero minded.
+\end{proof}
+
+In the following proposition we provide a more explicit expression for the costs evaluatd in the longrun opinion vectors. 
+Having that, we are ready to prove Theorem~\ref{thm:longrun}.
+
+\begin{proposition}
+\label{prop:properties}
+Let $G=(V,E)$ be a connected graph, $C\subseteq V$ and $\gamma_0\in [0,1]^V$.
+Then, the following holds.
+\begin{itemize}
+	\item[$(a)$] When $\beta=0$, for every $v\in V\setminus C$ we have $\gamma_{\infty}(v)=\tau_{v,C}(\gamma_0)$.
+	\item[$(b)$]  For every $u\in C$, we have that 
+\begin{equation*}
+2\tau^{-2}_{u,C-u}(\gamma_0)\cdot \cost_u(\Omega_C(\gamma_0,0))=\eta_u\left(\frac{\gamma_0(u)}{\tau_{u,C-u}(\gamma_0)}\right)^2+\sum_{v\in \nsf(u)\setminus C}\left(\frac{\tau_{v,C}(\gamma_0)}{\tau_{u,C-u}(\gamma_0)}\right)^2.
+\end{equation*}
+	\item[$(c)$]  For every $u\in C$, we have that $2\tau^{-2}_{u,C-u}(\gamma_0)\cdot\cost_u(\Omega_{C-u}(\gamma_0,0))$ is equal to
+\begin{equation*}
+\eta_u\left(\frac{\gamma_0(u)}{\tau_{u,C-u}(\gamma_0)}-1\right)^2+\degsf_C(u)+\sum_{v\in \nsf(u)\setminus C}\left(\frac{\tau_{v,C-u}(\gamma_0)}{\tau_{u,C-u}(\gamma_0)}-1\right)^2.
+\end{equation*}
+\end{itemize}
+\end{proposition}
+
+\begin{proof}[Proof of Proposition~\ref{prop:properties}]
+\vvcom{insertar demo de cada punto}
+\end{proof}
+
+
+\begin{proof}[Proof of Theorem~\ref{thm:longrun}]
+In what follows, we show that if a pair $(C,\gamma_0)$ satisfies the contraction property, then it is either zero minded or one minded. 
+Suppose first that $(C,\gamma_0)$ satisfies the zero contraction property. 
+Thanks to Proposition~\ref{prop:properties}, for every $u\in C$ we have that $2\tau^{-2}_{u,C-u}(\gamma_0)f_u(0)$ is equal to
+\begin{equation*}
+\sum_{v\in V\setminus C}\left(\frac{\tau_{v,C}(\gamma_0)}{\tau_{u,C-u}(\gamma_0)}\right)^2+\eta_u\left(\frac{2\gamma_0(u)}{\tau_{u,C-u}(\gamma_0)}-1\right)-\degsf_C(u) - \sum_{v\in V\setminus C}\left(\frac{\tau_{v,C-u}(\gamma_0)}{\tau_{u,C-u}(\gamma_0)}-1\right)^2\le 0,
+\end{equation*}
+where the last inequality comes from the fact that $(C,\gamma_0)$ satisfies the zero contraction property.
+It follows that $f_u(0)\le 0$ for every $u\in C$, and therefore $C$ is zero minded. 
+By Proposition~\ref{prop:minded} there exists an interval $[0,\beta^0]$ such that $f_u(\beta)\le 0$ for every $u\in C$ and for every $\beta\in [0,\beta^0]$. 
+In this case the theorem follows by taking $\mathcal{I}(C,\gamma_0)=[0,\beta^0]$.
+\end{proof}
+
+
+%\begin{proof}
+%
+%\end{proof}
+%
+%\begin{proof}[Proof of Theorem~\ref{thm:longrun}]
+%{\color{red}tomamos la interseccion sobre todos los intervalos, $\mathcal{I}_{\gamma_0,C}=\cap_{u\in C}\mathcal{I}_u$. La condicion sobre $C$ es tal que esta interseccion es no vacia.} 
+%\end{proof}
+\begin{comment}
+Given a triplet $(C,\beta,\gamma_0)$, observe that for every $u\in C$ that
+\begin{equation*}
+f_u''(\beta)=\frac{\eta_u}{2}\Big(1-\Theta(C-u)^2\Big)+\frac{1}{2}\Big(\deg(u)-\deg_C(u)\Big)(1-\Theta(C))^2-\frac{1}{2}\deg_C(u)(1-\Theta(C-u))^2.
+\end{equation*}
+
+\begin{equation}
+f_{\beta}(u) = \frac{\eta_u}{2}(\gamma_0-\beta)^2 + \sum_{v\in \nsf(u)\setminus C}
+((1-\Theta(C))\beta+g_v)^2-\frac{\eta_u}{2} (\gamma_0-\tilde{g}_u-\beta \Theta(C-u) )^2\\
+ - \frac{1}{2} \deg_C(u) ((1-\Theta(C-u))\beta-\tilde{g}_u)^2
+\end{equation}
+where,
+\begin{align*}
+	g_v &=\sum_{w \in V \setminus C } \gamma_0(w) \alpha_C(v,w)\\
+	\tilde{g}_u &=\sum_{w \in V \setminus (C-u) } \gamma_0(w) \alpha_{C-u}(u,w)
+\end{align*}
+Note that $f_{\beta}(u)$ is a quadratic function. When $\eta_u=0$ this function is concave if $\frac{\deg(u)}{1+\rho^2(C,u)}\leq \deg_C(u)$ where $\rho(C,u)=\frac{1-\Theta(C-u)}{1-\Theta(C)}\geq 1$. When $\eta_u>0$ the concavity is given by ,
+\begin{align*}
+\eta_u \left( \frac{1-\Theta^2(C-u)}{(1-\Theta(C))^2} \right) \frac{1}{1+\rho^2(C,u)}+\frac{\deg(u)}{1+\rho^2(C,u)}<\deg_C(u)
+\end{align*}
+
+In particular, if $\forall u \in C$ 
+
+\begin{align}
+\frac{\eta_u+\deg(u)}{2} \leq \deg_C(u)
+\end{align}
+we have that $f_{\beta}(u)$ is a concave function.º
+
+\begin{proposition}
+Let $G=(V,E)$ a connected graph, a vector of intrinsic opinions $\gamma_0\in [0,1]^V$ and $C\subseteq V$.
+Then, for every $u\in C$ there exists an interval $\mathcal{I}_{u,C}(\gamma_0)$, such that $f_u(\beta)\le 0$ if and only if $\beta\in \mathcal{I}_{u,C}(\gamma_0)$.
+\end{proposition}
+\end{comment}
+
+\section{Sustainability in the Long-run: Random Intrinsic Opinions}
+
+In what follows, we study under what conditions it is possible for a coordination to sustain in the long-run, that is, by considering the cost under the limiting opinion.
+The intrinsic opinions are drawn independently and uniformly distributed from $[0,1]$.
+We say that $(C,\beta,\gamma_0)$ is {\it sustainable in the long-run} if for every $u\in C$ we have~\footnote{For notational simplicity we denote by $C-u$ the set $C\setminus \{u\}$.} 
+\begin{equation*}
+\EE_{\gamma_0}(\cost_u(\Omega_C(\gamma_0,\beta)))\le \EE_{\gamma_0}(\cost_u(\Omega_{C-u}(\gamma_0,\beta))).
+\end{equation*}
+That is, every node in $C$ faces a lower cost by being in the coordination than being out.
+In what follows, we say that a pair $(C,\gamma_0)$ satisfies the {\it zero contraction condition} if for every $u\in C$, we have that 
+%\vvcom{Aca va la condicion que garantiza que $C$ es one minded o zero minded (ver mas abajo la def de esto)}
+%\vvcom{estas son las condiciones para $\eta_u=0$, cuando son distintos de cero queda un poco mas fea pero no tanto. Pero bueno, es lo que es no mas}
+\begin{equation*}
+%\EE^2_{u,C-u}(\gamma_0(\mathsf{a}_u))\ge \frac{1}{\deg_C(u)}\sum_{v\in V\setminus C}\EE_{v,C}^2(\gamma_0(\mathsf{a}_v))\left(\frac{1-\Theta_v(C)}{1-\Theta_u(C-u)}\right)^2
+%\deg_C(u) \ge \sum_{v\in V\setminus C}\left(\frac{\tau_{v,C}(\gamma_0)}{\tau_{u,C-u}(\gamma_0)}\right)^2+\eta_u\left(\frac{2\gamma_0(u)}{\tau_{u,C-u}(\gamma_0)}-1\right).
+%\degsf_C(u) + \sum_{v\in V\setminus C}\left(\frac{1-\Theta_{v,C-u}}{1-\Theta_{u,C-u}}-1\right)^2\ge \sum_{v\in V\setminus C}\left(\frac{1-\Theta_{v,C}}{1-\Theta_{u,C-u}}\right)^2+\eta_u\frac{1+\Theta_{u,C-u}}{1-\Theta_{u,C-u}}.
+\degsf_C(u)\ge \max\Big\{\Phi_1(u,C),\Phi_2(u,C)\Big\},
+\end{equation*}
+where the $\Phi_1(u,C)$ and $\Phi_2(u,C)$ are the graph parameters given by 
+\begin{align*}
+%\Phi_1(u,C)&=\sum_{v\in V\setminus C}\left(\left(\frac{1-\Theta_{v,C}}{1-\Theta_{u,C-u}}\right)^2-\left(\frac{1-\Theta_{v,C-u}}{1-\Theta_{u,C-u}}-1\right)^2\right)+\eta_u\frac{1+\Theta_{u,C-u}}{1-\Theta_{u,C-u}},\\
+\Phi_1(u,C)&=\frac{1}{\|\alpha_{u,C-u}\|_1^2}\sum_{v\in V\setminus C}\Big(\|\alpha_{v,C}\|_1^2-\|\alpha_{v,C-u}-\alpha_{u,C-u}\|_1^2\Big)+\eta_u\frac{2-\|\alpha_{u,C-u}\|_1}{\|\alpha_{u,C-u}\|_1}.\\
+\Phi_2(u,C)&=\frac{1}{\|\alpha_{u,C-u}\|^2}\sum_{v\in V\setminus C}\Big(\|\alpha_{v,C}\|^2-\|\alpha_{v,C-u}-\alpha_{u,C-u}\|^2\Big)+\eta_u\frac{2\alpha_{u,C-u}(u)}{\|\alpha_{u,C-u}\|^2}.
+\end{align*}
+%where $\mathsf{a}_u\sim f_{u,C-u}$ and $\mathsf{a}_{v}\sim f_{v,C}$ for every $v\in V\setminus C$.
+Similarly, we say that a pair $(C,\gamma_0)$ satisfies the {\it one opinion contraction condition} if for every $u\in C$, we have that 
+%\vvcom{Aca va la condicion que garantiza que $C$ es one minded o zero minded (ver mas abajo la def de esto)}
+\begin{equation*}
+%\EE^2_{u,C-u}(\gamma_0(\mathsf{a}_u))\ge \frac{1}{\deg_C(u)}\sum_{v\in V\setminus C}\EE_{v,C}^2(\gamma_0(\mathsf{a}_v))\left(\frac{1-\Theta_v(C)}{1-\Theta_u(C-u)}\right)^2
+%\deg_C(u) \ge \sum_{v\in V\setminus C}\left(\frac{\tau_{v,C}(\mathsf{e}-\gamma_0)}{\tau_{u,C-u}(\mathsf{e}-\gamma_0)}\right)^2+\eta_u\left(\frac{2(1-\gamma_0(u))}{\tau_{u,C-u}(\mathsf{e}-\gamma_0)}-1\right),
+\degsf_C(u) + \sum_{v\in V\setminus C}\left(\frac{\tau_{v,C-u}(\mathsf{e}-\gamma_0)}{\tau_{u,C-u}(\mathsf{e}-\gamma_0)}-1\right)^2\ge \sum_{v\in V\setminus C}\left(\frac{\tau_{v,C}(\mathsf{e}-\gamma_0)}{\tau_{u,C-u}(\mathsf{e}-\gamma_0)}\right)^2+\eta_u\left(\frac{2(1-\gamma_0(u))}{\tau_{u,C-u}(\mathsf{e}-\gamma_0)}-1\right).
+\end{equation*}
+\vvcom{me da la sensacion de que un conjunto no puede zer zero contractive y one contractive a la vez}
+where $\mathsf{e}$ is the all ones vector in $\RR^V$.
+In the sequel, we say that $(C,\gamma_0)$ satisfies the contraction condition if it satisfies at least one of the above conditions.
+The following is the main theorem of this section.
+\begin{theorem}
+\label{thm:longrun}
+Let $G=(V,E)$ a connected graph and $(C,\gamma_0)$ satisfying the contraction condition.
+Then, there exists a non-empty interval $\mathcal{I}(C,\gamma_0)\subseteq [0,1]$ with $\mathcal{I}(C,\gamma_0)\cap \{0,1\}\ne \emptyset$ such that for every $\beta\in \mathcal{I}(C,\gamma_0)$ we have that $(C,\beta,\gamma_0)$ is sustainable in the long-run.  
+\end{theorem}
+%\vvcom{describir aca el intervalo}
+Observe that in particular, an extreme opinion in $\{0,1\}$ makes the coordination sustainable in the long-run as long as $(C,\gamma_0)$ satisfies the contraction condition. 
+In what follows we show how to prove the theorem above. 
+\vvcom{aqui discutir un poco el teorema anterior}
+\subsection{Extreme Opinion Minded Sets: Proof of Theorem~\ref{thm:longrun}}
+
+We study first the conditions under which a node $u\in C$ faces a lower cost by being in the coordination.
+For every $u\in C$, consider the function 
+\begin{equation*}
+f_u(\beta)=\EE_{\gamma_0}(\cost_u(\Omega_C(\gamma_0,\beta)))- \EE_{\gamma_0}(\cost_u(\Omega_{C-u}(\gamma_0,\beta))).
+\end{equation*}
+In the following, we say that $C$ is {\it one minded} if for every $u\in C$ we have that $f_u(1)<0$.
+Symmetrically, we say that $C$ is {\it zero minded} if for every $u\in C$ we have that $f_u(0)<0$.
+
+\begin{proposition}
+\label{prop:minded}
+Let $C\subseteq V$ be a non-empty subset of nodes.
+Then, the following holds.
+\begin{itemize}
+	\item[$(a)$] If $C$ is one minded, there exists $\beta^{1}\in (0,1)$ such that for every $f_u(\beta)\le 0$ for every $\beta\in [\beta^1,1]$.
+	\item[$(b)$] If $C$ is zero minded, there exists $\beta^{0}\in (0,1)$ such that for every $f_u(\beta)\le 0$ for every $\beta\in [0,\beta^0]$.
+\end{itemize}
+\end{proposition}
+
+\begin{proof}
+If $C$ is one minded, by continuity we have that for every $u\in C$ there exists $\beta_u\in (0,1)$ such that $f_u(\beta)\le 0$ for every $\beta\in [\beta_u,1]$. 
+In particular, given $\beta^1=\max_{u\in C}\beta_u$, we have that for every $u\in C$ it holds that $f_u(\beta)<0$ for every $\beta\in [\beta^1,1]$.
+The proof follows in the same way when $C$ is zero minded.
+\end{proof}
+
+In the following propositions we provide a more explicit expression for the costs evaluated in the longrun opinion vectors. 
+Having that, we are ready to prove Theorem~\ref{thm:longrun}.
+One [property that will be useful in what comes next is the following. 
+Consider a random vector $\xi\in \RR^m$ where every cordinate is independently and uniformly distributed over $[0,1]$, and consider a vector a vector $x\in \RR^m$.
+Then, we have that
+\begin{equation*}
+\EE_{\xi}(\langle \xi,x\rangle)^2=\frac{1}{12}\|x\|_2^2+\|x\|_1^2.
+\end{equation*}
+
+\begin{lemma}
+\label{lem:expected-limit}
+Let $G=(V,E)$ a connected graph and $\gamma_0$ drawn independently and uniformly from $[0,1]$. 
+Then, the following holds.
+\begin{itemize}
+	\item[$(a)$] For every $v\in V\setminus C$ we have that $\EE_{\gamma_0}(\tau_{v,C}(\gamma_0))=\EE_{\gamma_0}(\tau_{v,C}(\mathsf{e}-\gamma_0))=\frac{1}{2}(1-\Theta_v(C))$.
+	\item[$(b)$] For every $v\in V\setminus C$ we have that $\EE_{\gamma_0}(\tau^2_{v,C}(\gamma_0))=\frac{1}{12}\|\alpha_{v,C}\|_2^2+\EE^2_{\gamma_0}(\tau_{v,C}(\gamma_0))$.
+	\item[$(c)$] For every $u\in C$ and every $v\in V\setminus (C-u)$ we have that 
+	\begin{equation*}
+	\EE_{\gamma_0}\Big(\tau_{v,C-u}(\gamma_0)-\tau_{u,C-u}(\gamma_0)\Big)^2=\frac{1}{12}\|\alpha_{v,C-u}-\alpha_{u,C-u}\|_2^2+\frac{1}{2}(\Theta_{u,C-u}-\Theta_{v,C-u})^2.
+	\end{equation*}
+	\item[$(d)$] For every $u\in C$ we have that $\EE_{\gamma_0}(\gamma_0(u)\tau_{u,C-u}(\gamma_0))=\frac{1}{12}\alpha_{u,C-u}(u)+\frac{1}{4}(1-\Theta_{u,C-u})$.
+	\item[$(e)$] For every $v\in V\setminus C$ we have that $\EE_{\gamma_0}(\gamma_{\infty}(v))=\frac{1}{2}+\left(\beta-\frac{1}{2}\right)\Theta_v(C)$.
+\end{itemize}
+\end{lemma}
+
+\begin{proof}[Proof of Lemma~\ref{lem:expected-limit}]
+
+\end{proof}
+
+\begin{proposition}
+\label{prop:properties}
+Let $G=(V,E)$ be a connected graph, $C\subseteq V$ and $\gamma_0\in [0,1]^V$.
+Then, the following holds.
+\begin{itemize}
+	\item[$(a)$] When $\beta=0$, for every $v\in V\setminus C$ we have $\gamma_{\infty}(v)=\tau_{v,C}(\gamma_0)$.
+	\item[$(b)$]  For every $u\in C$, we have that 
+\begin{equation*}
+2\cdot \EE_{\gamma_0}(\cost_u(\Omega_C(\gamma_0,0)))=\frac{\eta_u}{3}+\sum_{v\in \nsf(u)\setminus C}\EE_{\gamma_0}(\tau^2_{v,C}(\gamma_0))
+\end{equation*}
+	\item[$(c)$]  For every $u\in C$, we have that $2\cdot \cost_u(\Omega_{C-u}(\gamma_0,0))$ is equal to
+\begin{equation*}
+\eta_u\EE_{\gamma_0}\Big(\gamma_0(u)-\tau_{u,C-u}(\gamma_0)\Big)^2+\degsf_C(u)\EE_{\gamma_0}(\tau^2_{u,C-u}(\gamma_0))+\sum_{v\in V\setminus C}\EE_{\gamma_0}\Big(\tau_{v,C-u}(\gamma_0)-\tau_{u,C-u}(\gamma_0)\Big)^2.
+%\eta_u\left(\frac{\gamma_0(u)}{\tau_{u,C-u}(\gamma_0)}-1\right)^2+\degsf_C(u)+\sum_{v\in V\setminus C}\left(\frac{\tau_{v,C-u}(\gamma_0)}{\tau_{u,C-u}(\gamma_0)}-1\right)^2.
+\end{equation*}
+\end{itemize}
+\end{proposition}
+
+\begin{proof}[Proof of Proposition~\ref{prop:properties}]
+\vvcom{insertar demo de cada punto}
+\end{proof}
+
+
+\begin{proof}[Proof of Theorem~\ref{thm:longrun}]
+In what follows, we show that if a pair $(C,\gamma_0)$ satisfies the contraction property, then it is either zero minded or one minded. 
+Suppose first that $(C,\gamma_0)$ satisfies the zero contraction property. 
+Thanks to Proposition~\ref{prop:properties}, for every $u\in C$ we have that $2\tau^{-2}_{u,C-u}(\gamma_0)f_u(0)$ is equal to
+\begin{equation*}
+\sum_{v\in V\setminus C}\left(\frac{\tau_{v,C}(\gamma_0)}{\tau_{u,C-u}(\gamma_0)}\right)^2+\eta_u\left(\frac{2\gamma_0(u)}{\tau_{u,C-u}(\gamma_0)}-1\right)-\degsf_C(u) - \sum_{v\in V\setminus C}\left(\frac{\tau_{v,C-u}(\gamma_0)}{\tau_{u,C-u}(\gamma_0)}-1\right)^2\le 0,
+\end{equation*}
+where the last inequality comes from the fact that $(C,\gamma_0)$ satisfies the zero contraction property.
+It follows that $f_u(0)\le 0$ for every $u\in C$, and therefore $C$ is zero minded. 
+By Proposition~\ref{prop:minded} there exists an interval $[0,\beta^0]$ such that $f_u(\beta)\le 0$ for every $u\in C$ and for every $\beta\in [0,\beta^0]$. 
+In this case the theorem follows by taking $\mathcal{I}(C,\gamma_0)=[0,\beta^0]$.
+\end{proof}
+
+
+%\begin{proof}
+%
+%\end{proof}
+%
+%\begin{proof}[Proof of Theorem~\ref{thm:longrun}]
+%{\color{red}tomamos la interseccion sobre todos los intervalos, $\mathcal{I}_{\gamma_0,C}=\cap_{u\in C}\mathcal{I}_u$. La condicion sobre $C$ es tal que esta interseccion es no vacia.} 
+%\end{proof}
+\begin{comment}
+Given a triplet $(C,\beta,\gamma_0)$, observe that for every $u\in C$ that
+\begin{equation*}
+f_u''(\beta)=\frac{\eta_u}{2}\Big(1-\Theta(C-u)^2\Big)+\frac{1}{2}\Big(\deg(u)-\deg_C(u)\Big)(1-\Theta(C))^2-\frac{1}{2}\deg_C(u)(1-\Theta(C-u))^2.
+\end{equation*}
+
+\begin{equation}
+f_{\beta}(u) = \frac{\eta_u}{2}(\gamma_0-\beta)^2 + \sum_{v\in \nsf(u)\setminus C}
+((1-\Theta(C))\beta+g_v)^2-\frac{\eta_u}{2} (\gamma_0-\tilde{g}_u-\beta \Theta(C-u) )^2\\
+ - \frac{1}{2} \deg_C(u) ((1-\Theta(C-u))\beta-\tilde{g}_u)^2
+\end{equation}
+where,
+\begin{align*}
+	g_v &=\sum_{w \in V \setminus C } \gamma_0(w) \alpha_C(v,w)\\
+	\tilde{g}_u &=\sum_{w \in V \setminus (C-u) } \gamma_0(w) \alpha_{C-u}(u,w)
+\end{align*}
+Note that $f_{\beta}(u)$ is a quadratic function. When $\eta_u=0$ this function is concave if $\frac{\deg(u)}{1+\rho^2(C,u)}\leq \deg_C(u)$ where $\rho(C,u)=\frac{1-\Theta(C-u)}{1-\Theta(C)}\geq 1$. When $\eta_u>0$ the concavity is given by ,
+\begin{align*}
+\eta_u \left( \frac{1-\Theta^2(C-u)}{(1-\Theta(C))^2} \right) \frac{1}{1+\rho^2(C,u)}+\frac{\deg(u)}{1+\rho^2(C,u)}<\deg_C(u)
+\end{align*}
+
+In particular, if $\forall u \in C$ 
+
+\begin{align}
+\frac{\eta_u+\deg(u)}{2} \leq \deg_C(u)
+\end{align}
+we have that $f_{\beta}(u)$ is a concave function.º
+
+\begin{proposition}
+Let $G=(V,E)$ a connected graph, a vector of intrinsic opinions $\gamma_0\in [0,1]^V$ and $C\subseteq V$.
+Then, for every $u\in C$ there exists an interval $\mathcal{I}_{u,C}(\gamma_0)$, such that $f_u(\beta)\le 0$ if and only if $\beta\in \mathcal{I}_{u,C}(\gamma_0)$.
+\end{proposition}
+\end{comment}
+
+
+
+\section{Random Networks}
+
+In the following we analyze long-run sustainability coordination over randomly generated networks.
+Furthermore, we consider the intrinsic opinions to be randomly and independently distributed.
+%\begin{lemma}
+%\label{lem:expected-limit}
+%Let $G=(V,E)$ a connected graph and $\gamma_0$ drawn independently and uniformly from $[0,1]$. 
+%Then, the following holds.
+%\begin{itemize}
+%	\item[$(a)$] For every $v\in V\setminus C$ we have that $\EE_{\gamma_0}(\tau_{v,C}(\gamma_0))=\EE_{\gamma_0}(\tau_{v,C}(\mathsf{e}-\gamma_0))=\frac{1}{2}(1-\Theta_v(C))$.
+%%	\item[$(b)$] For every $v\in V\setminus C$ we have that $\EE_{\gamma_0}(\tau_{v,C}(\mathsf{e}-\gamma_0))=\frac{1}{2}(1-\Theta_v(C))$.
+%	\item[$(b)$] For every $v\in V\setminus C$ we have that $\EE_{\gamma_0}(\gamma_{\infty}(v))=\frac{1}{2}+\left(\beta-\frac{1}{2}\right)\Theta_v(C)$.
+%\end{itemize}
+%\end{lemma}
+%
+%\begin{proof}[Proof of Lemma~\ref{lem:expected-limit}]
+%
+%\end{proof}
+\subsection{A Mixture between Geometric and Erdos-Renyi Random Graphs}
+
+\subsection{Graph Expansion and the Contraction Property}
+Recall that $\Omega_C$ is a linear function in $(\gamma_0,\beta)$, and therefore $f_u$ is a quadratic function on $\beta$.
+It will be convenient to express the cost function in matrix form.
+For every $u\in V$, consider the matrix $\asf_u\in \RR^{V\times V}$ such that $\asf_u(u,v)=-1$ when $v\in \nsf(u)$, and zero otherwise; and let $\dsf\in \RR^{V\times V}$ the diagonal matrix such that $\dsf(u,u)=\degsf(u)$ for every $u\in V$.
+Then, for every $y\in \RR^V$ we have that 
+\begin{equation}
+\cost_u(y)=\frac{1}{2}y^{\top}\lsf_u y+\frac{\eta_u}{2}(\gamma_0(u)-y(u))^2,
+\end{equation}
+where $\lsf_u=\dsf-\asf_u$, and we call this matrix the {\it Laplacian} for node $u\in V$.
+In particular, the matrix $\lsf=\sum_{u\in V}\lsf_u$ is known as the Laplacian of the graph $G$.
+
+\begin{example}
+
+\end{example}
+
+\begin{comment}
+\section{Bounding the discounted cost}
+
+By splitting the discounted cost in the mixing time, we obtain the following bound.
+
+\begin{proposition}
+{\color{red} elaborar aca}
+\begin{equation}
+\sum_{t= 0}^{\infty}\delta^t\cost_u(\gamma_t)\le \sum_{t=0}^{\tmix(\mathcal{G})}\delta^t\cost_u(\gamma_t)+\frac{\delta^{\tmix(\mathcal{G})}}{1-\delta}(\cost_u(\gamma_{\infty})+f(\beta)).
+\end{equation}
+\end{proposition}
+\end{comment}
+%{\it Graphs.} Graphs $G = (V, E)$ considered in this paper may be directed or
+%undirected; typically we assume $|V| = n$ and $|E| = m$, though if there is
+%scope for confusion we use $|V|$ or $|E|$ explicitly. For undirected graphs,
+%for a node $v \in V$, we denote by $N(v)$ its \emph{neighbourhood}, that is $N(v) =
+%\{ w ~|~ \{v, w \} \in E \}$, and its degree by $\deg(v) := |N(v)|$. In the
+%case of directed graphs, we denote $N^+(v) := \{ w ~|~ (v, w) \in E \}$ its
+%\emph{out-neighbourhood} and by $\deg^+(v) := |N^+(v)|$ its \emph{out-degree}.
+%Similarly, $N^-(v) := \{ u ~|~ (u, v) \in E \}$ denotes its
+%\emph{in-neighbourhood} and $\deg^-(v) := |N^-(v)|$ its \emph{in-degree}.
+%%Furthermore, $\davg$ denotes the average degree, i.e, $\sum_ {v\in V}\deg(v)/n$.  
+%%Whenever there is scope for confusion, we use the notations
+%%$\deg_G(u)$, $N_G(v)$, $\davg(G)$, \etc to emphasise that the terms are with
+%%respect to graph $G$. \medskip
+%
+%\noindent {\it Random walks in graphs.} 
+%\vvcom{tengo que seguir modificando aca, adaptar a la nocion de RW que necesitamos aca}
+%A discrete-time lazy random walk
+%$(X_t)_{t\ge 0}$ on a graph $G=(V,E)$ is defined by a Markov chain with state
+%space $V$ and transition matrix $P=(p(u,v))_{u,v\in V}$ defined as follows: 
+% For every $u \in V$, $p(u,u) = 1/2$ ({\it Laziness}).
+%In the undirected setting, for every $v \in N(u)$, $p(u,v) = 1/(2
+%		\deg(u))$. 
+%%In the directed setting, for every $v \in N^+(u)$, $p(u,v) =1/(2 \deg^+(u))$. 
+%%%
+%The transition probabilities can be expressed in matrix form as $P=(I+
+%\mathcal{D}^{-1}A)/2$, where $A$ is the adjacency matrix of $G$, $\mathcal{D}$
+%is the diagonal matrix of node degrees (only out-degrees if $G$ is directed),
+%and $I$ is the identity. Let $p^t(u, \cdot)$ denote the distribution over nodes
+%of a random walk at time step $t$ with $X_0 = u$. For the most part, we will
+%consider (strongly) connected graphs. Together with laziness, this ensures that
+%the stationary distribution of the random walk, denoted by $\pi$, is unique and
+%given by $\pi P=\pi$. In the undirected case, the form of the stationary
+%distribution is particularly simple, $\pi(u) = \deg(u)/(2|E|)$; furthermore, the
+%random walk is reversible, that is $\pi(u)  p(u,v) = \pi(v) p(v,u)$. As before,
+%$\pi_G$ is used to emphasise that the stationary distribution is respect to
+%graph $G$. \medskip
+
+%\noindent {\it Mixing time.} To measure how far $p^t(u,\cdot)$ is from the
+%stationary distribution we consider the {\it total variation distance}; for
+%distributions $\mu,\nu$  over sample space $\Omega$ the total variation
+%distance is $\tv(\mu,\nu)=\frac{1}{2}\displaystyle\sum_{x\in \Omega}|\mu(x)-\nu(x)|$.  The
+%\emph{mixing time} of the random walk is defined as
+%\[
+%\tmix := \max_{u \in V} \min \{ t \geq 1 ~|~ \tv(p^t(u, \cdot),\pi) \leq e^{-1} \}.
+%\]
+%%
+%Although the choice of $e^{-1}$ is arbitrary, it is known that after
+%$\tmix\log(1/\varepsilon)$ steps, the total variation distance is at most
+%$\epsilon$. 
+
+\begin{comment}
+\section{Commentarios/Intuiciones}
+\begin{conjecture}
+For every graph $G$ satisfying certain conditions, there exists a sustainable coordination.
+\end{conjecture}
+
+\vvcom{si $C=V$ siempre tenemos un coordination sustainable cierto? probablemente sea interesante probar que existe un $C$ "pequenho" que sustenta coordination} 
+\begin{intuition}
+For every coordination, the initial opinions can not be too far.
+\end{intuition}
+
+\begin{intuition}
+There exists a trade-off between how well connected is a node $v\in C$ with the regular nodes, and how far the posted opinion could be from its natural (DeGroot) opinion.
+\end{intuition}
+
+\begin{intuition}
+On the one hand, say we have $C$ of cardinality two. If one of the nodes is very well connected, could incur a high cost by not listening to the rest of the network. On the other hand, if we post an opinion similar to the one followed by the very well connected node, the cost incured will be low, and even more, the variance in the neighbourhood might decrease, which could help to sustain the coordination. 
+\end{intuition}
+
+\begin{intuition}
+Let $\phi(S)=\partial S/|E(S)|$, where $\partial S$ is the cut of $S$ and $E(S)$ is the edges connecting nodes both in $S$.
+If $\phi(S)$ is small, the set $S$ is badly connected with the exterior (in proportion), and then we can expect to sustain a coordination, in certain regime. 
+\end{intuition}
+
+\begin{intuition}
+Now suppose that $\phi(S)=O(1)$ and $E(S)$ is small (poorly connected within $S$), then we can expect that sustaining a coordination is harder. With decent probability, there will be a node with incentives to deviate. 
+\end{intuition}
+
+\begin{intuition}
+We say that a node is problematic if it maximizes the connectivity to the rest of the world in comparison to the connectivity with the coalition (in ratio). It could be that this type of nodes dominate the rest in terms of deviation: if that type of node has no incentive to deviate, neither the rest.
+\end{intuition}
+\section{{\color{red} Otras ideas a considerar:}}
+
+\begin{itemize}
+\item Podriamos definifir un operador que minimize la dispersión del bloque como,
+
+\begin{equation}
+\text{var}_C(\beta,\theta)=(1-\eta)(\beta-\theta(C))^2+ \frac{\eta}{\delta_c(C)} \sum_{w\in N_c(C)}(\beta-\theta(w))^2,
+\end{equation}
+donde $\theta(w)$ es la opinión de los miembros de $C$ según DeGroot.
+
+	\item Seria interesante poder cuantificar cuanto gana una coordinacion versus no coordinarse, eso daria una especie de {\it price of coordination/collusion}.
+	\item Ver los otros papers Acemoglu/experimentos para sacar mas ideas sobre que otra caracteristica/comportamiento podria ser interesante de medir o estudiar.
+\end{itemize}
+\end{comment}
+\bibliographystyle{plain}
+\bibliography{bibliography}
+%\appendix
+
+\end{document}

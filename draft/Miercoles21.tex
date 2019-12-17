@@ -1,0 +1,55 @@
+\documentclass{article}
+
+
+\usepackage{amsmath,amssymb}
+
+\begin{document}
+
+\begin{itemize}
+	\item $K_i=0$.
+	\item $K_i\in (0, \infty)$ partially stubborn.
+	\item $K_i=\infty$ fully stubborn.
+\end{itemize}	
+	
+	Bajo De Groot, la opinión de consenso (supongo $G$ es convexo, etc).
+	
+	\begin{itemize}
+		\item $\beta_\infty$ promedio de las opiniones iniciales de los stubborn ($K_i>0$).
+	\end{itemize}
+	
+	Reducen la dinámica a estudiar un random walk en un grafo $\tilde G$ modificado, la opinión de consenso es estudiar la distribución estacionaria del RW en $\tilde G$.
+	
+	\begin{align*}
+		var_u (\gamma, \gamma_{t-1}(u))=(1-\eta) (\gamma-\gamma_{t-1}(u))^2+\frac{\eta}{|N(u)|}\sum_{v \in N(u)} (\gamma-\gamma_{t-1}(v))^2
+	\end{align*}
+	En el paper,
+	\begin{align*}
+		\tilde var = \frac{var_u}{\eta} \frac{|N(u)|}{2}
+	\end{align*}
+	
+\textbf{Tarea 1} Estudiar de Groot en este caso (similar a paper, pero la dispersión en etapa $t$ miro $t-1$).
+
+\begin{align*}
+	\sum_{t\geq 1} \delta^t var_u(\gamma_t,\gamma_{t-1})
+\end{align*}
+
+\underline{Historia:}
+\begin{itemize}
+	\item Queremos entender el efecto de la coordinación.
+	\item \textbf{Tarea 1} de Groot modificada bajo partial and fully stubborn agents.
+	\item Estudiamos si existe coordinación estática $(C,\beta)$ tal que
+	\item 
+	
+	
+	
+	
+	\begin{itemize}
+	\item $\forall G$, $\forall C$, $\exists \beta$?
+	\item $\forall G$, $\exists C$, $\exists \beta$? con un $C$ estructurado.
+	\item $G \sim$ Familia de grafos aleatorios.
+
+	
+	\end{itemize}
+	
+\end{itemize}	
+\end{document}
