@@ -15,7 +15,7 @@ IO(5)=rand;
 IO(6)=rand;
 IO(7)=rand;
 
-a=0.1;
+a=0;
 b=2;
 %beta=0;
 
@@ -39,4 +39,4 @@ R2=Coor(IO,A,a,b,0.5);
 R3=Coor(IO,A,a,b,1);
 RE=[RE,[R1;R2;R3]];
 end
-sum(sum(RE))
+sum(RE')

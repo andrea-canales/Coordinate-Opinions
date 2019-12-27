@@ -15,11 +15,11 @@ i=i+1;
 end
 
 %COSTFJ=a*abs(IO'-FJ(:,i));
-COSTFJ=0.5*a*abs(IO'-FJ(:,i)).^b;
+COSTFJ=a*abs(IO'-FJ(:,i)).^b;
 %COSTFJ=zeros(7,1);
 for f=1:v
     for l=1:v
-        COSTFJ(f)=0.5*A(f,l)*(FJ(f,i)-FJ(l,i))^b+COSTFJ(f);
+        COSTFJ(f)=A(f,l)*(FJ(f,i)-FJ(l,i))^b+COSTFJ(f);
     end
 end
 
@@ -49,11 +49,11 @@ i=i+1;
 end
 
 %COSTCO=a*abs(IO'-CO(:,i));
-COSTCO=0.5*a*abs(IO'-CO(:,i)).^b;
+COSTCO=a*abs(IO'-CO(:,i)).^b;
 %COSTCO=zeros(7,1);
 for f=1:v
     for l=1:v
-        COSTCO(f)=0.5*A(f,l)*abs(CO(f,i)-CO(l,i))^b+COSTCO(f);
+        COSTCO(f)=A(f,l)*abs(CO(f,i)-CO(l,i))^b+COSTCO(f);
     end
 end
 
@@ -79,11 +79,11 @@ CO3=[CO3,AUX'];
 i=i+1;
 end
 
-COSTCO3=0.5*a*abs(IO'-CO3(:,i)).^b;
+COSTCO3=a*abs(IO'-CO3(:,i)).^b;
 %COSTCO3=zeros(7,1);
 for f=1:v
     for l=1:v
-        COSTCO3(f)=0.5*A(f,l)*abs(CO3(f,i)-CO3(l,i))^b+COSTCO3(f);
+        COSTCO3(f)=A(f,l)*abs(CO3(f,i)-CO3(l,i))^b+COSTCO3(f);
     end
 end
 
@@ -104,11 +104,11 @@ CO6=[CO6,AUX'];
 i=i+1;
 end
 
-COSTCO6=0.5*a*abs(IO'-CO6(:,i)).^b;
+COSTCO6=a*abs(IO'-CO6(:,i)).^b;
 %COSTCO6=zeros(7,1);
 for f=1:v
     for l=1:v
-        COSTCO6(f)=0.5*A(f,l)*abs(CO6(f,i)-CO6(l,i))^b+COSTCO6(f);
+        COSTCO6(f)=A(f,l)*abs(CO6(f,i)-CO6(l,i))^b+COSTCO6(f);
     end
 end
 
@@ -129,11 +129,11 @@ CO7=[CO7,AUX'];
 i=i+1;
 end
 
-COSTCO7=0.5*a*abs(IO'-CO7(:,i)).^b;
+COSTCO7=a*abs(IO'-CO7(:,i)).^b;
 %COSTCO7=zeros(7,1);
 for f=1:v
     for l=1:v
-        COSTCO7(f)=0.5*A(f,l)*abs(CO7(f,i)-CO7(l,i))^b+COSTCO7(f);
+        COSTCO7(f)=A(f,l)*abs(CO7(f,i)-CO7(l,i))^b+COSTCO7(f);
     end
 end
 
