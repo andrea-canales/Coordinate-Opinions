@@ -135,12 +135,8 @@ i=i+1;
 end
 
 for j=1:7
-    if j==3 || j==6 || j==7
-    COSTCO6(j)=a2*abs(IO(j)-CO6(j,i)).^b;
-        else
-    COSTCO6(j)=a1*abs(IO(j)-CO6(j,i)).^b;
-    end
-end
+    if if j==3 || j==6 || j==7
+COSTCO6(j)=a2*abs(IO(j)-CO6(j,i)).^b;
 %COSTCO6=zeros(7,1);
 for f=1:v
     for l=1:v
@@ -155,11 +151,7 @@ CO7(3,i)=beta;
 CO7(6,i)=beta;
 while norm(CO7(:,i-1)-CO7(:,i),'inf')>0.03
     for j=1:7
-        if j==7
-        AUX(j)=a2/(a2+sum(A(j,:)))*IO(j)+1/(a2+sum(A(j,:)))*dot(CO7(:,i),A(:,j));
-        else
-    AUX(j)=a1/(a1+sum(A(j,:)))*IO(j)+1/(a1+sum(A(j,:)))*dot(CO7(:,i),A(:,j));
-        end
+    AUX(j)=a/(a+sum(A(j,:)))*IO(j)+1/(a+sum(A(j,:)))*dot(CO7(:,i),A(:,j));
     %AB=[CO7(:,i).*A(:,j)];
     %AUX(j)=median(AB(AB>0));
     end
@@ -169,13 +161,7 @@ CO7=[CO7,AUX'];
 i=i+1;
 end
 
-for j=1:7
-    if j==3 || j==6 || j==7
-    COSTCO7(j)=a2*abs(IO(j)-CO7(j,i)).^b;
-    else
-    COSTCO7(j)=a1*abs(IO(j)-CO7(j,i)).^b;
-    end
-end
+COSTCO7=a*abs(IO'-CO7(:,i)).^b;
 %COSTCO7=zeros(7,1);
 for f=1:v
     for l=1:v

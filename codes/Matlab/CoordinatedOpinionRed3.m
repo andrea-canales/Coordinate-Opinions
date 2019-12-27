@@ -15,7 +15,8 @@ IO(5)=rand;
 IO(6)=rand;
 IO(7)=rand;
 
-a=0;
+a1=0.12;
+a2=0.1;
 b=2;
 %beta=0;
 
@@ -34,9 +35,10 @@ B(6,7)=1;
 A=B+B';
 
 
-R1=Coor(IO,A,a,b,0);
-R2=Coor(IO,A,a,b,0.5);
-R3=Coor(IO,A,a,b,1);
+R1=Coor(IO,A,a1,a2,b,0);
+R2=Coor(IO,A,a1,a2,b,0.5);
+R3=Coor(IO,A,a1,a2,b,1);
 RE=[RE,[R1;R2;R3]];
+
 end
 sum(RE')
