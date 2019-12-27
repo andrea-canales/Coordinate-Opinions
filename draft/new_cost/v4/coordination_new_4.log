@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.5.23)  27 DEC 2019 10:41
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.5.23)  27 DEC 2019 10:55
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**coordination_new_2.tex
-(./coordination_new_2.tex
+**coordination_new_4.tex
+(./coordination_new_4.tex
 LaTeX2e <2017-04-15>
 Babel <3.10> and hyphenation patterns for 84 language(s) loaded.
 (/usr/local/texlive/2017/texmf-dist/tex/latex/base/article.cls
@@ -1176,8 +1176,8 @@ Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \algofontsize=\skip63
 Package hyperref Info: Option `colorlinks' set `true' on input line 112.
 
-(./coordination_new_2.aux)
-\openout1 = `coordination_new_2.aux'.
+(./coordination_new_4.aux)
+\openout1 = `coordination_new_4.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 114.
 LaTeX Font Info:    ... okay on input line 114.
@@ -1239,9 +1239,9 @@ LaTeX Info: Redefining \ref on input line 114.
 LaTeX Info: Redefining \pageref on input line 114.
 LaTeX Info: Redefining \nameref on input line 114.
 
-(./coordination_new_2.out) (./coordination_new_2.out)
+(./coordination_new_4.out) (./coordination_new_4.out)
 \@outlinefile=\write5
-\openout5 = `coordination_new_2.out'.
+\openout5 = `coordination_new_4.out'.
 
 
 ABD: EveryShipout initializing macros
@@ -1274,9 +1274,9 @@ LaTeX Warning: Marginpar on page 1 moved.
 [1
 
 {/usr/local/texlive/2017/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-(./coordination_new_2.toc)
+(./coordination_new_4.toc)
 \tf@toc=\write6
-\openout6 = `coordination_new_2.toc'.
+\openout6 = `coordination_new_4.toc'.
 
  [2]
 Package hyperref Info: bookmark level for unknown example defaults to 0 on inpu
@@ -1297,61 +1297,63 @@ Underfull \hbox (badness 10000) in paragraph at lines 264--266
  []
 
 [4]
+Underfull \hbox (badness 10000) in paragraph at lines 337--345
+
+ []
+
 Package hyperref Info: bookmark level for unknown theorem defaults to 0 on inpu
-t line 340.
+t line 357.
+
+LaTeX Warning: Citation `morris' on page 5 undefined on input line 415.
 
 
-LaTeX Warning: Citation `morris' on page 5 undefined on input line 366.
+LaTeX Warning: Marginpar on page 5 moved.
 
 [5]
-
-LaTeX Warning: Citation `morris' on page 6 undefined on input line 376.
-
-
-LaTeX Warning: Marginpar on page 6 moved.
-
 Package hyperref Info: bookmark level for unknown proposition defaults to 0 on 
-input line 399.
-[6] [7]
-Package hyperref Info: bookmark level for unknown claim defaults to 0 on input 
-line 501.
- [8] [9] Excluding 'comment' comment. Excluding 'comment' comment.
-Excluding 'comment' comment.
+input line 439.
+ [6] Excluding 'comment' comment. Excluding 'comment' comment.
+Excluding 'comment' comment. Excluding 'comment' comment.
+Excluding 'comment' comment. [7]
 
-LaTeX Warning: Citation `morris' on page 10 undefined on input line 824.
+LaTeX Warning: Citation `morris' on page 8 undefined on input line 878.
 
 
-LaTeX Warning: Citation `young:innovation' on page 10 undefined on input line 8
-35.
+LaTeX Warning: Citation `young:innovation' on page 8 undefined on input line 88
+9.
 
-[10]
+[8]
 
-LaTeX Warning: Marginpar on page 11 moved.
+LaTeX Warning: Reference `thm:alternatives' on page 9 undefined on input line 9
+49.
+
+
+LaTeX Warning: Marginpar on page 9 moved.
 
 Package hyperref Info: bookmark level for unknown corollary defaults to 0 on in
-put line 898.
+put line 952.
 
-LaTeX Warning: Marginpar on page 11 moved.
+LaTeX Warning: Marginpar on page 9 moved.
 
-[11] [12]
-Underfull \hbox (badness 10000) in paragraph at lines 1070--1073
+[9] [10]
+Package hyperref Info: bookmark level for unknown claim defaults to 0 on input 
+line 1084.
+
+Underfull \hbox (badness 10000) in paragraph at lines 1124--1127
 
  []
 
 Excluding 'comment' comment. Excluding 'comment' comment.
-(./coordination_new_2.bbl
+No file coordination_new_4.bbl.
+[11]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1254.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1254.
+ (./coordination_new_4.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1254.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1254.
 
-LaTeX Warning: Empty `thebibliography' environment on input line 3.
-
-) [13] [14]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1200.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1200.
- (./coordination_new_2.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1200.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1200.
-
-Package rerunfilecheck Info: File `coordination_new_2.out' has not changed.
-(rerunfilecheck)             Checksum: AB0E030602323CDE6C724F198C4BE5FF;1036.
+Package rerunfilecheck Info: File `coordination_new_4.out' has not changed.
+(rerunfilecheck)             Checksum: 2920BD3E43DC94AB9E45B8EF981489CA;945.
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
@@ -1359,16 +1361,19 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 LaTeX Warning: There were undefined references.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1200.
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1254.
  ) 
 Here is how much of TeX's memory you used:
- 28922 strings out of 492995
- 690718 string characters out of 6132704
- 911602 words of memory out of 5000000
- 31811 multiletter control sequences out of 15000+600000
+ 28895 strings out of 492995
+ 690262 string characters out of 6132704
+ 907063 words of memory out of 5000000
+ 31800 multiletter control sequences out of 15000+600000
  59757 words of font info for 69 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 62i,12n,96p,835b,964s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 62i,11n,96p,835b,964s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2017/texmf-dist/fonts/enc/dvips/tex-gyre/q-rm.enc}</usr/l
 ocal/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/lo
 cal/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/loc
@@ -1391,10 +1396,10 @@ s/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2017/texmf-dist/
 fonts/type1/public/tex-gyre/qplb.pfb></usr/local/texlive/2017/texmf-dist/fonts/
 type1/public/tex-gyre/qplr.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/
 public/tex-gyre/qplri.pfb>
-Output written on coordination_new_2.pdf (14 pages, 315798 bytes).
+Output written on coordination_new_4.pdf (11 pages, 307668 bytes).
 PDF statistics:
- 355 PDF objects out of 1000 (max. 8388607)
- 314 compressed objects within 4 object streams
- 95 named destinations out of 1000 (max. 500000)
- 117 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 314 PDF objects out of 1000 (max. 8388607)
+ 277 compressed objects within 3 object streams
+ 81 named destinations out of 1000 (max. 500000)
+ 109 words of extra memory for PDF output out of 10000 (max. 10000000)
 
